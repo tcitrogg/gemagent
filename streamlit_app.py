@@ -87,7 +87,7 @@ for message in st.session_state.messages:
     with st.chat_message(message["role"], avatar=message["avatar"]):
         st.markdown(message["content"])
 
-if userinput := st.chat_input("Say something"):    
+if userinput := st.chat_input("Ask 'How many bones are in the body?'"):    
     
     # Display user message in chat message container
     st.chat_message("user", avatar="👶").markdown(userinput)

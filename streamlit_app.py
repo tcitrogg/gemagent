@@ -4,6 +4,8 @@ import os
 from langchain_google_genai import ChatGoogleGenerativeAI
 from langchain_core.prompts import ChatPromptTemplate
 
+st.set_page_config(page_title="Gemagen", page_icon="👾")
+
 if "GEMINI_API_KEY" not in os.environ:
     os.environ["GEMINI_API_KEY"] = getpass.getpass("Enter your Google AI API key: ")
 

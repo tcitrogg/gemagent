@@ -38,7 +38,7 @@ prompt = ChatPromptTemplate.from_messages(
 
 chain = prompt | LLM
 
-SYS_PROMPT = "You are a helpful assistant that instructs and plan out learning schedule for learn about Blockchain"
+SYS_PROMPT = "You are a helpful assistant that teach and give details about the Human anatomy"
 
 
 # using the langchain to handle responses
@@ -50,15 +50,15 @@ def handle_response(userinput: str, USER_PROMPT=""):
     #         "input": userinput,
     #     }
     # )
-    if (bool(USER_PROMPT) is False):
-        system_prompt = SYS_PROMPT
-    else:
-        system_prompt = USER_PROMPT
-        SYS_PROMPT = USER_PROMPT
+    # if (bool(USER_PROMPT) is False):
+    #     system_prompt = SYS_PROMPT
+    # else:
+    #     system_prompt = USER_PROMPT
+    #     # SYS_PROMPT = USER_PROMPT
     messages = [
         (
             "system",
-            system_prompt,
+            SYS_PROMPT,
         ),
         ("human", userinput),
     ]
@@ -72,8 +72,8 @@ sidebar.header("👾 Gemagen")
 sidebar.chat_message("arkitect", avatar="🫀").markdown("[yours Tcitrogg](https://bnierimi.vercel.app)")
 
 st.header("👾 Gemagen")
-st.chat_message(f"Gemagen", avatar="👾").markdown(f"PROMPT = `{SYS_PROMPT}`")
-st.caption("Ask something related to the prompt")
+# st.chat_message(f"Gemagen", avatar="👾").markdown(f"PROMPT = `{SYS_PROMPT}`")
+st.caption("Ask something related to the Human anatomy")
 # st.divider()
 
 # with st.container(border=True, height=400):
@@ -84,7 +84,7 @@ if "messages" not in st.session_state:
     
 # Display chat messages from history on app rerun
 for message in st.session_state.messages:
-    with st.chat_message(message["role"]):
+    with st.chat_message(message["role"], avatar=message["avatar"]):
         st.markdown(message["content"])
 
 if userinput := st.chat_input("Say something"):    
@@ -95,7 +95,7 @@ if userinput := st.chat_input("Say something"):
     st.session_state.messages.append({"role": "user", "avatar":"👶", "content": userinput})
     
     with st.spinner("Thinking..."):
-        response = handle_response(userinput, USER_PROMPT=given_user_prompt).content
+        response = handle_response(userinput).content
         # Display assistant response in chat message container
         gemagen_ass = st.chat_message("Gemagen", avatar="👾")
     with gemagen_ass:
